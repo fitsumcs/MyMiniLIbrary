@@ -7,7 +7,88 @@
             return new Greet.init(firstname, lastname, language);
        }
 
-     Greet.prototype = {  };  
+    var langs = ['en', 'am']   
+
+    var greetings = 
+    {
+         en: 'Hi There ', 
+         am: 'Endate Nek '
+
+    };
+
+    var formalGreeting = {
+        en: "Greetings", 
+        am: "Selam Leant Yehune"
+
+    };
+    var loged = {
+        en: "Loggin In", 
+        am: "Tedergwale"
+
+    };
+
+     Greet.prototype = {  
+            
+          fullName: function()
+          {
+              return this.firstname + ' ' + this.lastname;
+          },
+          validateLan : function()
+          {
+              if(langs.indexOf(this.language) === -1) 
+              {
+                 throw "Invalid Language";
+              }
+          },
+          informalGreeting: function()
+          {
+             return greetings[this.language] + ' ' + this.firstname + '!';
+          },
+          formalGreeting: function()
+          {
+             return formalGreeting[this.language] + ', ' + this.fullName();
+          },
+          greet: function(formal)
+          {
+            var message; 
+            if(formal)
+            {
+                message = this.formalGreeting();
+            }
+            else{
+                message = this.informalGreeting();
+            }
+
+            if(console)
+            {
+                console.log(message);
+            }
+              
+             return this;
+
+
+          },
+          log:function()
+          {
+              if(console)
+              {
+                  console.log(loged[this.language] + ':' + this.fullName());
+              }
+                return this;
+            },
+            setLanguage: function(lang)
+            {
+                this.language = lang;
+                this.validateLan();
+                return this;
+            }
+           
+
+
+
+
+
+     };  
 
      Greet.init = function(firstname, lastname, language)
      {
@@ -22,7 +103,7 @@
      }
 
      Greet.init.prototype = Greet.prototype;
-     
+
      global.Greet = global.G$ = Greet;
 
 }

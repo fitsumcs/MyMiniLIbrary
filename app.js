@@ -1,2 +1,2 @@
 var g = G$('firstname', 'lastname');
-console.log(g);
+g.greet().setLanguage('am').greet(true);
